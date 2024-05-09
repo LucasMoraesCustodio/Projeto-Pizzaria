@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido - Pizzaria do Zé</title>
+
+    <style>
+        body{
+            font-family: monospace;
+            text-align: left;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: blanchedalmond;
+        }
+
+        h1, h2{
+            text-align: left;
+            color: brown;
+        }
+
+        table{
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td{
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resumo do pedido</h1>
+    <table>
+        <tr>
+            Descrição do Pedido:
+        </tr>
+        <tr>
+            <td id="pedidoDescricao">---------------</td>
+        </tr>
+    </table>
+
+    <h2>Total do pedido:</h2>
+    <p id="pedido-total">R$ -----------</p>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            //Extrair os parametros da URL
+            const urlParams = new URLSearchParams(window.location.search)
+            const pedidoString = urlParams.get('pedido')
+
+            if(pedidoString){
+                //Converter a string JSON em objeto JS
+                const pedidoJSON = JSON.parse(pedidoString)
+
+                //Atualiza o conteudo da pagina com os detalhes
+                const descricaoPedidoElement = document.getElementById("pedidoDescricao")
+                descricaoPedidoElement.innerHTML = pedidoJSON.descricao
+
+                const valorPedidoElement = document.getElementById("pedido-total")
+                valorPedidoElement.textContent = 'R$: ' + pedidoJSON.total
+            }else{
+                const pedidoDetailsElement= document.getElementById('pedido-details')
+                pedidoDetailsElement.innerHTML = '<p> Não foi possivel recuperar os detalhes do pedido<p>'
+            }
+
+
+        })
+    </script>
+</body>
+</html>
