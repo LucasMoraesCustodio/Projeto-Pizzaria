@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Bebidas - Pizzaria do zé</title>
+
+    <style>
+        body{
+            font-family: monospace;
+            text-align: left;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: blanchedalmond;
+        }
+
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td{
+            border: 1px solid;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th{
+            background-color: #f2f2f2;
+        }
+
+        h1{
+            text-align: left;
+            color: brown;
+        } 
+        h2{
+            text-align: left;
+        }
+
+        .btn{
+            margin-top: 20px;
+            padding: 5px 10px;
+            font-size: 16px;
+            background-color: cadetblue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover{
+            background-color:rgb(53, 87, 88);
+        }
+
+        .sem-estoque{
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bebidas disponíveis</h1>
+
+    <table id="produtos">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Estoque</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+
+        <tbody id="produtos-corpo"></tbody>
+
+    </table>
+
+    <h2>Resumo do pedido:</h2>
+    <h2>Bebidas:</h2>
+    <table id="carrinho">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody id="carrinho-corpo"></tbody>
+    </table>
+    <h2>Pizza:</h2>
+
+    <h2>Total do pedido: R$<span id="total">00,00</span></h2>
+
+
+    <script src="./bebida.js"></script>
+</body>
+</html>
