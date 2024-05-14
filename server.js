@@ -42,12 +42,21 @@ app.get('/cardapio.js', (req,res) =>{
         } 
     })
 })
-app.get('/pedido',(req, res) =>{
-    fs.readFile(path.join(__dirname, 'pedido.html'), (err,data)=>{
+app.get('/bebida',(req, res) =>{
+    fs.readFile(path.join(__dirname, 'bebida.html'), (err,data)=>{
         if(err){
             res.status(500).send("500 - Erro Interno do Servidor")
         }else{
             res.status(200).type('text/html').send(data)
+        } 
+    })
+})
+app.get('/bebida.js', (req,res) =>{
+    fs.readFile(path.join(__dirname, 'bebida.js'), (err,data)=>{
+        if(err){
+            res.status(500).send("500 - Erro Interno do Servidor")
+        }else{
+            res.status(200).type('text/javascript').send(data)
         } 
     })
 })

@@ -65,21 +65,33 @@ function removerProduto(nome){
 
 function atualizarCarrinho(){
     const carrinhoCorpo = document.getElementById("carrinho-corpo")
+    const carrinhoHead = document.getElementById("carrinho-head")
 
+    carrinhoHead.innerHTML = `
+            <tr>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Ação</th>
+            </tr>
+            `
+
+    //Insere cada item individualmente na tabela do carrinho e adiciona o valor do produto ao valor total
     carrinhoCorpo.innerHTML = ""
     let total = 0
     carrinho.forEach(item => {
         const tr = document.createElement("tr")
         tr.innerHTML = `
             <td>${item.produto.nome}</td>
-            <td>R$ ${item.produto.preco}</td>
+            <td>R$ ${item.produto.preco * item.quantidade}</td>
             <td>${item.quantidade}</td>
             <td><Button class="btn" onClick="removerProduto('${item.produto.nome}')">Remover</Button></td>`
-            carrinhoCorpo.appendChild(tr)
 
-            total += item.produto.preco * item.quantidade
+        carrinhoCorpo.appendChild(tr)
+        total += item.produto.preco * item.quantidade
     })
-    document.getElementById("total").textContent = total.toFixed(2)
+    
+    document.getElementById("total").textContent = alterarPreco(total).toFixed(2)
 }
 
 function atualizarEstoque(){
@@ -110,5 +122,37 @@ Object.keys(estoque).forEach(nome =>{
         <td><Button class="btn" onClick="adicionarProduto('${nome}')">Adicionar Produto</Button></td>
     `
     produtoCorpo.appendChild(tr)
+})
+
+//Adiciona o valor das bebidas ao valor da Pizza
+let totalPizza = 0
+function alterarPreco(preco){
+    let totalCarrinho = 0
+    totalCarrinho += preco
+    totalCarrinho += totalPizza
+
+    return totalCarrinho
+}
+
+
+//Recupera os parametros da URL assim que a tela é carregada
+document.addEventListener('DOMContentLoaded', function(){
+    //Extrair os parametros da URL
+    const urlParams = new URLSearchParams(window.location.search)
+    const pedidoString = urlParams.get('pedido')
+
+    if(pedidoString){
+        //Converter a string JSON em objeto JS
+        const pedidoJSON = JSON.parse(pedidoString)
+
+        //Atualiza o conteudo da pagina com os detalhes
+        const descricaoPedidoElement = document.getElementById("pedidoDescricao")
+        descricaoPedidoElement.innerHTML = pedidoJSON.descricao
+
+        totalPizza = parseInt(pedidoJSON.total)
+    }else{
+        const pedidoDetailsElement= document.getElementById('pedido-details')
+        pedidoDetailsElement.innerHTML = '<p> Não foi possivel recuperar os detalhes do pedido<p>'
+    }
 })
 

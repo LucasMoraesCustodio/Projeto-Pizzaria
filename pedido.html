@@ -31,44 +31,6 @@
     </style>
 </head>
 <body>
-    <h1>Resumo do pedido</h1>
-    <table>
-        <tr>
-            Descrição do Pedido:
-        </tr>
-        <tr>
-            <td id="pedidoDescricao">---------------</td>
-        </tr>
-    </table>
-
-    <h2>Total do pedido:</h2>
-    <p id="pedido-total">R$ -----------</p>
-
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function(){
-            //Extrair os parametros da URL
-            const urlParams = new URLSearchParams(window.location.search)
-            const pedidoString = urlParams.get('pedido')
-
-            if(pedidoString){
-                //Converter a string JSON em objeto JS
-                const pedidoJSON = JSON.parse(pedidoString)
-
-                //Atualiza o conteudo da pagina com os detalhes
-                const descricaoPedidoElement = document.getElementById("pedidoDescricao")
-                descricaoPedidoElement.innerHTML = pedidoJSON.descricao
-
-                const valorPedidoElement = document.getElementById("pedido-total")
-                valorPedidoElement.textContent = 'R$: ' + pedidoJSON.total
-            }else{
-                const pedidoDetailsElement= document.getElementById('pedido-details')
-                pedidoDetailsElement.innerHTML = '<p> Não foi possivel recuperar os detalhes do pedido<p>'
-            }
-
-
-        })
-    </script>
+   
 </body>
 </html>
