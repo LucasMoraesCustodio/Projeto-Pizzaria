@@ -57,8 +57,19 @@ function adicionarProduto(nome){
 }
 
 function removerProduto(nome){
-    carrinho = carrinho.filter(item => item.produto.nome !== nome)
-    estoque[nome].quantidade++
+    console.log(carrinho)
+    const itemIndex = carrinho.findIndex((item) => item.produto.nome === nome);
+
+    if (itemIndex !== -1) {
+        const removedItem = carrinho[itemIndex];
+        if (removedItem.quantidade > 1) {
+            removedItem.quantidade--;
+        } else {
+            carrinho.splice(itemIndex, 1);
+        }
+        estoque[nome].quantidade++;
+    }
+    
     atualizarCarrinho()
     atualizarEstoque()
 }
@@ -150,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function(){
         descricaoPedidoElement.innerHTML = pedidoJSON.descricao
 
         totalPizza = parseInt(pedidoJSON.total)
+        document.getElementById("totalPizza").textContent = totalPizza
     }else{
         const pedidoDetailsElement= document.getElementById('pedido-details')
         pedidoDetailsElement.innerHTML = '<p> Não foi possivel recuperar os detalhes do pedido<p>'

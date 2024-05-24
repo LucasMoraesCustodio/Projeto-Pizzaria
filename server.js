@@ -61,8 +61,18 @@ app.get('/bebida.js', (req,res) =>{
     })
 })
 
+app.get('/pedido',(req, res) =>{
+    fs.readFile(path.join(__dirname, 'pedido.html'), (err,data)=>{
+        if(err){
+            res.status(500).send("500 - Erro Interno do Servidor")
+        }else{
+            res.status(200).type('text/html').send(data)
+        }
+    })
+})
+
 //configuração do server
-const PORT = 2222
+const PORT = 4500
 app.listen(PORT, () => {
     console.log(`Servidor criado na porta: ${PORT}`)
 })

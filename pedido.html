@@ -31,6 +31,54 @@
     </style>
 </head>
 <body>
-   
+    <h1>Pizza selecionada</h1>
+    <h2>Descrição Pizza</h2>
+    <table>
+        <tr>
+            <td id="pedidoDescricao"></td>
+        </tr>
+    </table>
+    <h2>Total da Pizza: R$<span id="totalPizza">00,00</span></h2>
+
+    <button id="voltar">Voltar</button>
+    <button id="confirmar">Confirmar</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            //Extrair os parametros da URL
+            const urlParams = new URLSearchParams(window.location.search)
+            const pedidoString = urlParams.get('pedido')
+
+            if(pedidoString){
+                //Converter a string JSON em objeto JS
+                const pedidoJSON = JSON.parse(pedidoString)
+
+                //Atualiza o conteudo da pagina com os detalhes
+                const descricaoPedidoElement = document.getElementById("pedidoDescricao")
+                descricaoPedidoElement.innerHTML = pedidoJSON.descricao
+                totalPizza = parseInt(pedidoJSON.total)
+                document.getElementById("totalPizza").textContent = totalPizza
+            }else{
+                const pedidoDetailsElement= document.getElementById('pedido-details')
+                pedidoDetailsElement.innerHTML = '<p> Não foi possivel recuperar os detalhes do pedido<p>'
+            }
+
+
+            function voltarPagina(){
+                
+                window.location.href = `cardapio`
+            }
+            function confirmarPedido(){
+                const urlParams = new URLSearchParams(window.location.search)
+                const pedidoString = urlParams.get('pedido')
+                window.location.href = `bebida?pedido=${pedidoString}`
+            }
+            const voltar = document.getElementById('voltar')
+            voltar.addEventListener('click',voltarPagina)
+
+            const confirmar = document.getElementById('confirmar')
+            confirmar.addEventListener('click', confirmarPedido)
+        })
+    </script>
 </body>
 </html>

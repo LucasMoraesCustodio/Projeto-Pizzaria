@@ -1,14 +1,14 @@
 {
   "name": "projeto-pizzaria",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projeto para pizzaria utilizando Node.js",
   "main": "cardapio.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Lucas de Moraes Custódio",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2"

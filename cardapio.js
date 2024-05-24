@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded',function(){
         const pedidoString = JSON.stringify(pedidoJSON)
 
         //Redirecionar para pedido.html e enviar dados
-        window.location.href= `bebida?pedido=${pedidoString}`
+        window.location.href= `pedido?pedido=${pedidoString}`
 
         }
     //Chama a função montarPizza quando o botão é clicado
